@@ -1,13 +1,14 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Test {
-    int a;
     private static Random random = new Random();
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
+
         int level = 0;
         int enemyCounter = 1;
         int turn = 0;
@@ -113,6 +114,23 @@ public class Test {
                                                 System.out.println(newWeapon.getName() + " dropped.");
                                                 itemArrayList.add(newWeapon);
                                                 enemyArrayList.remove(index1);
+                                            }else {
+                                                if (tank.getHP() > 0){
+                                                    System.out.println("Enemy attacked to tank");
+                                    double damageEnemy = enemyAttack();
+                                         tank.renewHP(1,damageEnemy);
+                                                    System.out.println("Enemy made "+ damageEnemy + " damage.");
+                                                    System.out.println("Tank has " + tank.getHP() + "HP.");
+                                                    if (tank.getHP() < 0){
+                                                        System.out.println("Tank is dead.");
+                                                        Weapon newWeapon = throwWeapon();
+                                                        System.out.println(newWeapon.getName() + " dropped.");
+                                                        itemArrayList.add(newWeapon);
+                                                        characterArrayList.remove(tank);
+                                                    }else {
+
+                                                    }
+                                                }
                                             }
                                             i++;
                                             break;
@@ -362,7 +380,32 @@ public class Test {
                             }
                         }
                     }else {
-                        System.out.println("NEXT LEVEL");
+                        System.out.println("Do you want to see your score(Type yes for score)? or do you want to quit(Type quit for quit)?");
+                        String question = sc.next();
+                        switch (question) {
+                            case "yes":
+                                try {
+                                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("SCOREBOARD.txt"));
+                                    int totalScore = level + fighter.getHandledWeapon().getValue() + healer.getHandledWeapon().getValue() + tank.getHandledWeapon().getValue();
+                                    bufferedWriter.write("Player" + (level) + " " + totalScore);
+                                    bufferedWriter.close();
+                                } catch (Exception e) {
+                                    return;
+                                }
+                                try {
+                                    BufferedReader bufferedReader = new BufferedReader(new FileReader("SCOREBOARD.txt"));
+                                    String line;
+                                    while ((line = bufferedReader.readLine()) != null) {
+                                        System.out.println(line);
+                                    }
+                                    bufferedReader.close();
+                                } catch (Exception e) {
+                                    return;
+                                }
+                                break;
+                            case "quit":
+                                System.exit(0);
+                        }System.out.println("NEXT LEVEL");
                         i = 3;
                     }
                 }
@@ -373,11 +416,16 @@ public class Test {
             enemyCounter = (int) Math.pow(2, level);
         }
     }
+    public static double enemyAttack(){
+        enemyAttack();
+        return 0;
+    }
     public static void enemyGenerator(int enemyCounter,ArrayList<Enemy> enemyArrayList){
         Weapon sword = new Sword("Broken sword",1,1,2);
         Weapon shield = new Shield("Broken Shield",2,1,1);
         Weapon wand = new Wand("Broken Wand",1,1,0.5);
         Armor leatherArmor = new LeatherArmor("Old Armor",1,1);
+
 
         for (int i = 0; i < enemyCounter; i++) {
             String name = "Enemy" + (i+1);
@@ -385,14 +433,17 @@ public class Test {
             if (enemyWeapon<8 && enemyWeapon>0){
                 Enemy enemy = new Enemy(name,sword,leatherArmor);
                 enemyArrayList.add(enemy);
+                enemy.attack();
             }
             else if (enemyWeapon>8 && enemyWeapon<10){
                 Enemy enemy = new Enemy(name,wand,leatherArmor);
                 enemyArrayList.add(enemy);
+                enemy.attack();
             }
             else if (enemyWeapon ==10){
                 Enemy enemy = new Enemy(name,shield,leatherArmor);
                 enemyArrayList.add(enemy);
+                enemy.attack();
             }
         }
     }
