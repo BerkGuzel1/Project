@@ -45,8 +45,11 @@ public class Test {
         healer.printInfo(healer);
         System.out.println();
         tank.add(shield);
+        tank.add(tankArmor);
         fighter.add(sword);
+        fighter.add(fighterArmor);
         healer.add(wand);
+        healer.add(healerArmor);
 
 
 

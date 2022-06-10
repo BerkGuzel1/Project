@@ -73,7 +73,7 @@ public abstract class Character implements Extra{
 
     public void printInventory() {
         for (int i = 0; i < inventory.size(); i++) {
-            System.out.println((i + 1) + inventory.get(i).getName() + " weights " + inventory.get(i).getWeight());
+            System.out.println((i + 1) + ")" + inventory.get(i).getName() + " weights " + inventory.get(i).getWeight());
         }
     }
 
@@ -81,7 +81,7 @@ public abstract class Character implements Extra{
         double total = calculateWeight();
 
         if (item.getCategory().equals("armor")) {
-            if ((total + item.getWeight()) <= strength) {
+            if ((total + item.getWeight()) <= strength*2) {
                 inventory.add(item);
 
                 System.out.println(item.getName() + " picked");
@@ -98,16 +98,16 @@ public abstract class Character implements Extra{
                 }
             }
         } else if (item.getCategory().equals("weapon")) {
-            if ((total + item.getWeight())/2 <= strength) {
+            if ((total + item.getWeight())/2 <= strength*2) {
                 inventory.add(item);
                 System.out.println(item.getName() + " picked");
             } else {
 
-                if (strength >= (total + item.getWeight()) / 2) {
+                if (2*strength >= (total + item.getWeight()) / 2) {
                 } else {
                     System.out.println("Inventory is full.You must drop an item.");
                 }
-                if (strength >= (total + item.getWeight()) / 2) {
+                if (2*strength >= (total + item.getWeight()) / 2) {
                     inventory.add(item);
                 }
             }
