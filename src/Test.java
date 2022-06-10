@@ -7,7 +7,7 @@ public class Test {
     private static Random random = new Random();
     private static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         int level = 0;
         int enemyCounter = 1;
@@ -518,28 +518,34 @@ public class Test {
                         String question = sc.next();
                         switch (question) {
                             case "yes":
+                               File file = new File("SCOREBOARD.txt");
+                               Scanner scan = new Scanner(file);
+                                System.out.println("Enter your name:");
+                                double point = Math.pow(2,level);
+                                double totalScore = point + fighter.getHandledWeapon().getValue() + healer.getHandledWeapon().getValue() + tank.getHandledWeapon().getValue();
+                                String name= sc.next();
                                 try {
-                                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("SCOREBOARD.txt"));
-                                    int totalScore = level + fighter.getHandledWeapon().getValue() + healer.getHandledWeapon().getValue() + tank.getHandledWeapon().getValue();
-                                    bufferedWriter.write("Player" + (level+1) + " " + totalScore);
-                                    bufferedWriter.close();
-                                } catch (Exception e) {
+                                FileWriter writer= new FileWriter("SCOREBOARD.txt");
+                                writer.write(name + ": " +  totalScore);
+                                writer.close();
+                            } catch (Exception e){
                                     return;
                                 }
-                                try {
-                                    BufferedReader bufferedReader = new BufferedReader(new FileReader("SCOREBOARD.txt"));
-                                    String line;
-                                    while ((line = bufferedReader.readLine()) != null) {
-                                        System.out.println(line);
-                                    }
-                                    bufferedReader.close();
-                                } catch (Exception e) {
-                                    return;
-                                }
+                               try {
+                                   FileReader reader = new FileReader("SCOREBOARD.txt");
+                                 int data = reader.read();
+                                 while (data != -1){
+                                     System.out.print((char) data);
+                                    data= reader.read();
+                                 }
+                                   reader.close();
+                               }catch (Exception exception){
+                                   return;
+                               }
                                 break;
                             case "quit":
                                 System.exit(0);
-                        }System.out.println("NEXT LEVEL");
+                        }System.out.println("\nNEXT LEVEL");
                         i = 3;
                     }
                 }
