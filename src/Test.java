@@ -197,10 +197,14 @@ public class Test {
                                                     itemArrayList.get(j).printInfo();
                                                 }
                                                 System.out.println("Will you pick?");
-                                                int itemIndex = sc.nextInt();
-                                                itemIndex = itemIndex - 1;
-                                                String response = sc.next();
-                                                healer.add(itemArrayList.get(itemIndex));
+                                                String answer = sc.next();
+                                                if (answer.toLowerCase().equals("yes")) {
+                                                    int itemIndex = sc.nextInt();
+                                                    itemIndex = itemIndex - 1;
+                                                    healer.add(itemArrayList.get(itemIndex));
+                                                }else {
+
+                                                }
                                             }
                                             break;
                                         case "inventory":
@@ -313,9 +317,15 @@ public class Test {
                                                     itemArrayList.get(j).printInfo();
                                                 }
                                                 System.out.println("Will you pick?");
-                                                int itemIndex = sc.nextInt();
-                                                itemIndex = itemIndex - 1;
-                                                tank.add(itemArrayList.get(itemIndex));
+                                                String answer = sc.next();
+                                                if (answer.toLowerCase().equals("yes")) {
+                                                    int itemIndex = sc.nextInt();
+                                                    itemIndex = itemIndex - 1;
+                                                    tank.add(itemArrayList.get(itemIndex));
+                                                    break;
+                                                }else {
+
+                                                }
                                             }
                                             break;
                                         case "inventory":
@@ -365,7 +375,7 @@ public class Test {
                                                 index1++;
                                             }
                                             System.out.println("Fighter attacked to " + enemyArrayList.get(index1).getName());
-                                            double damage = fighter.attack();
+                                            double damage = (fighter.attack())/3;
                                             enemyArrayList.get(index1).renewHP(1, damage);
                                             System.out.println("Fighter made " + damage + "damage.");
                                             System.out.println(enemyArrayList.get(index1).getName() + " has " + enemyArrayList.get(index1).getHP() + " HP.");
@@ -439,9 +449,14 @@ public class Test {
                                                     itemArrayList.get(j).printInfo();
                                                 }
                                                 System.out.println("Will you pick?");
-                                                int itemIndex = sc.nextInt();
-                                                itemIndex = itemIndex - 1;
-                                                tank.add(itemArrayList.get(itemIndex));
+                                                String answer = sc.next();
+                                                if (answer.toLowerCase().equals("yes")) {
+                                                    int itemIndex = sc.nextInt();
+                                                    itemIndex = itemIndex - 1;
+                                                    fighter.add(itemArrayList.get(itemIndex));
+                                                    break;
+                                                }else {
+                                                }
                                             }
                                             break;
                                         case "inventory":
@@ -506,7 +521,7 @@ public class Test {
                                 try {
                                     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("SCOREBOARD.txt"));
                                     int totalScore = level + fighter.getHandledWeapon().getValue() + healer.getHandledWeapon().getValue() + tank.getHandledWeapon().getValue();
-                                    bufferedWriter.write("Player" + (level) + " " + totalScore);
+                                    bufferedWriter.write("Player" + (level+1) + " " + totalScore);
                                     bufferedWriter.close();
                                 } catch (Exception e) {
                                     return;
@@ -551,7 +566,7 @@ public class Test {
                 enemyArrayList.add(enemy);
                 System.out.println(enemy.attack());
             }
-            else if (enemyWeapon>8 && enemyWeapon<10){
+            else if (enemyWeapon>7 && enemyWeapon<10){
                 Enemy enemy = new Enemy(name,wand,leatherArmor);
                 enemyArrayList.add(enemy);
                 enemy.attack();
