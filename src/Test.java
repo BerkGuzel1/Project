@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Test {
-    int a=0;
+    int a;
     private static Random random = new Random();
     private static Scanner sc = new Scanner(System.in);
 
