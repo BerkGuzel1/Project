@@ -545,7 +545,7 @@ public class Test {
                                 break;
                             case "quit":
                                 System.exit(0);
-                        }System.out.println("\nNEXT LEVEL");
+                        }System.out.println("\n NEXT LEVEL");
                         i = 3;
                     }
                 }
