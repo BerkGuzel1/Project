@@ -25,6 +25,7 @@ public class Test {
         Weapon wand = new Wand("Short Wand",1,2,0.5);
         Armor healerArmor = new LeatherArmor("Leather Armor",1 ,1);
         Character healer = new Healer("healer",wand,healerArmor);
+        Enemy enemy = new Enemy("",sword,fighterArmor);
         characterArrayList.add(fighter);
         characterArrayList.add(tank);
         characterArrayList.add(healer);
@@ -104,11 +105,11 @@ public class Test {
                                                 index1++;
                                             }
                                             System.out.println("Healer attacked to " + enemyArrayList.get(index1).getName());
-                                            double damage = healer.attack();
+                                            double damage = (healer.attack())/3;
                                             enemyArrayList.get(index1).renewHP(1, damage);
                                             System.out.println("Healer made " + damage + "damage.");
                                             System.out.println(enemyArrayList.get(index1).getName() + " has " + enemyArrayList.get(index1).getHP() + " HP.");
-                                            if (enemyArrayList.get(index1).getHP() < 0) {
+                                            if (enemyArrayList.get(index1).getHP() <= 0) {
                                                 System.out.println(enemyArrayList.get(index1).getName() + " is dead.");
                                                 Weapon newWeapon = throwWeapon();
                                                 System.out.println(newWeapon.getName() + " dropped.");
@@ -117,7 +118,7 @@ public class Test {
                                             }else {
                                                 if (tank.getHP() > 0){
                                                     System.out.println("Enemy attacked to tank");
-                                    double damageEnemy = enemyAttack();
+                                              double damageEnemy= enemy.attack();
                                          tank.renewHP(1,damageEnemy);
                                                     System.out.println("Enemy made "+ damageEnemy + " damage.");
                                                     System.out.println("Tank has " + tank.getHP() + "HP.");
@@ -128,7 +129,34 @@ public class Test {
                                                         itemArrayList.add(newWeapon);
                                                         characterArrayList.remove(tank);
                                                     }else {
-
+                                                    }
+                                                }else if (fighter.getHP() > 0){
+                                                    System.out.println("Enemy attacked to fighter");
+                                                    double damageEnemy= enemy.attack();
+                                                    fighter.renewHP(1,damageEnemy);
+                                                    System.out.println("Enemy made "+ damageEnemy + " damage.");
+                                                    System.out.println("Fighter has " + fighter.getHP() + "HP.");
+                                                    if (fighter.getHP() < 0){
+                                                        System.out.println("Fighter is dead.");
+                                                        Weapon newWeapon = throwWeapon();
+                                                        System.out.println(newWeapon.getName() + " dropped.");
+                                                        itemArrayList.add(newWeapon);
+                                                        characterArrayList.remove(fighter);
+                                                    }else {
+                                                    }
+                                                }else if (healer.getHP() > 0){
+                                                    System.out.println("Enemy attacked to healer");
+                                                    double damageEnemy= enemy.attack();
+                                                    healer.renewHP(1,damageEnemy);
+                                                    System.out.println("Enemy made "+ damageEnemy + " damage.");
+                                                    System.out.println("Healer has " + healer.getHP() + "HP.");
+                                                    if (healer.getHP() < 0){
+                                                        System.out.println("Healer is dead.");
+                                                        Weapon newWeapon = throwWeapon();
+                                                        System.out.println(newWeapon.getName() + " dropped.");
+                                                        itemArrayList.add(newWeapon);
+                                                        characterArrayList.remove(healer);
+                                                    }else {
                                                     }
                                                 }
                                             }
@@ -216,7 +244,7 @@ public class Test {
                                                 index1++;
                                             }
                                             System.out.println("Tank attacked to " + enemyArrayList.get(index1).getName());
-                                            double damage = tank.attack();
+                                            double damage = (tank.attack())/2;
                                             enemyArrayList.get(index1).renewHP(1, damage);
                                             System.out.println("Tank made " + damage + "damage.");
                                             System.out.println(enemyArrayList.get(index1).getName() + " has " + enemyArrayList.get(index1).getHP() + " HP.");
@@ -226,6 +254,50 @@ public class Test {
                                                 System.out.println(newWeapon.getName() + " dropped.");
                                                 itemArrayList.add(newWeapon);
                                                 enemyArrayList.remove(index1);
+                                            }else {
+                                                if (tank.getHP() > 0){
+                                                    System.out.println("Enemy attacked to tank");
+                                                    double damageEnemy= enemy.attack();
+                                                    tank.renewHP(1,damageEnemy);
+                                                    System.out.println("Enemy made "+ damageEnemy + " damage.");
+                                                    System.out.println("Tank has " + tank.getHP() + "HP.");
+                                                    if (tank.getHP() < 0){
+                                                        System.out.println("Tank is dead.");
+                                                        Weapon newWeapon = throwWeapon();
+                                                        System.out.println(newWeapon.getName() + " dropped.");
+                                                        itemArrayList.add(newWeapon);
+                                                        characterArrayList.remove(tank);
+                                                    }else {
+                                                    }
+                                                }else if (fighter.getHP() > 0){
+                                                    System.out.println("Enemy attacked to fighter");
+                                                    double damageEnemy= enemy.attack();
+                                                    fighter.renewHP(1,damageEnemy);
+                                                    System.out.println("Enemy made "+ damageEnemy + " damage.");
+                                                    System.out.println("Fighter has " + fighter.getHP() + "HP.");
+                                                    if (fighter.getHP() < 0){
+                                                        System.out.println("Fighter is dead.");
+                                                        Weapon newWeapon = throwWeapon();
+                                                        System.out.println(newWeapon.getName() + " dropped.");
+                                                        itemArrayList.add(newWeapon);
+                                                        characterArrayList.remove(fighter);
+                                                    }else {
+                                                    }
+                                                }else if (healer.getHP() > 0){
+                                                    System.out.println("Enemy attacked to healer");
+                                                    double damageEnemy= enemy.attack();
+                                                    healer.renewHP(1,damageEnemy);
+                                                    System.out.println("Enemy made "+ damageEnemy + " damage.");
+                                                    System.out.println("Healer has " + healer.getHP() + "HP.");
+                                                    if (healer.getHP() < 0){
+                                                        System.out.println("Healer is dead.");
+                                                        Weapon newWeapon = throwWeapon();
+                                                        System.out.println(newWeapon.getName() + " dropped.");
+                                                        itemArrayList.add(newWeapon);
+                                                        characterArrayList.remove(healer);
+                                                    }else {
+                                                    }
+                                                }
                                             }
                                             i++;
                                             break;
@@ -300,6 +372,50 @@ public class Test {
                                                 System.out.println(newWeapon.getName() + " dropped.");
                                                 itemArrayList.add(newWeapon);
                                                 enemyArrayList.remove(index1);
+                                            }else {
+                                                if (tank.getHP() > 0){
+                                                    System.out.println("Enemy attacked to tank");
+                                                    double damageEnemy= enemy.attack();
+                                                    tank.renewHP(1,damageEnemy);
+                                                    System.out.println("Enemy made "+ damageEnemy + " damage.");
+                                                    System.out.println("Tank has " + tank.getHP() + "HP.");
+                                                    if (tank.getHP() < 0){
+                                                        System.out.println("Tank is dead.");
+                                                        Weapon newWeapon = throwWeapon();
+                                                        System.out.println(newWeapon.getName() + " dropped.");
+                                                        itemArrayList.add(newWeapon);
+                                                        characterArrayList.remove(tank);
+                                                    }else {
+                                                    }
+                                                }else if (fighter.getHP() > 0){
+                                                    System.out.println("Enemy attacked to fighter");
+                                                    double damageEnemy= enemy.attack();
+                                                    fighter.renewHP(1,damageEnemy);
+                                                    System.out.println("Enemy made "+ damageEnemy + " damage.");
+                                                    System.out.println("Fighter has " + fighter.getHP() + "HP.");
+                                                    if (fighter.getHP() < 0){
+                                                        System.out.println("Fighter is dead.");
+                                                        Weapon newWeapon = throwWeapon();
+                                                        System.out.println(newWeapon.getName() + " dropped.");
+                                                        itemArrayList.add(newWeapon);
+                                                        characterArrayList.remove(fighter);
+                                                    }else {
+                                                    }
+                                                }else if (healer.getHP() > 0){
+                                                    System.out.println("Enemy attacked to healer");
+                                                    double damageEnemy= enemy.attack();
+                                                    healer.renewHP(1,damageEnemy);
+                                                    System.out.println("Enemy made "+ damageEnemy + " damage.");
+                                                    System.out.println("Healer has " + healer.getHP() + "HP.");
+                                                    if (healer.getHP() < 0){
+                                                        System.out.println("Healer is dead.");
+                                                        Weapon newWeapon = throwWeapon();
+                                                        System.out.println(newWeapon.getName() + " dropped.");
+                                                        itemArrayList.add(newWeapon);
+                                                        characterArrayList.remove(healer);
+                                                    }else {
+                                                    }
+                                                }
                                             }
                                             i++;
                                             break;
@@ -416,10 +532,7 @@ public class Test {
             enemyCounter = (int) Math.pow(2, level);
         }
     }
-    public static double enemyAttack(){
-        enemyAttack();
-        return 0;
-    }
+
     public static void enemyGenerator(int enemyCounter,ArrayList<Enemy> enemyArrayList){
         Weapon sword = new Sword("Broken sword",1,1,2);
         Weapon shield = new Shield("Broken Shield",2,1,1);
@@ -433,7 +546,7 @@ public class Test {
             if (enemyWeapon<8 && enemyWeapon>0){
                 Enemy enemy = new Enemy(name,sword,leatherArmor);
                 enemyArrayList.add(enemy);
-                enemy.attack();
+                System.out.println(enemy.attack());
             }
             else if (enemyWeapon>8 && enemyWeapon<10){
                 Enemy enemy = new Enemy(name,wand,leatherArmor);
