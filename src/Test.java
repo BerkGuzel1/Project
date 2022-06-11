@@ -482,16 +482,17 @@ public class Test {
                             i = 3;
                         }
                     }
+
                     if (enemyArrayList.size() > 0) {
                         for (int j = 0; j < enemyArrayList.size(); j++) {
                             int index5 = characterArrayList.size();
                             index5 = index5 - 1;
-                            int xRandom = random.nextInt(0, index5);
+                         /*   int xRandom = random.nextInt(0, index5);
                             if (!enemyArrayList.get(j).isBlock()) {
                                 if (characterArrayList.get(xRandom).getHandledWeapon().getType().equals("shield")) {
                                     boolean isBlock = random.nextBoolean();
                                     if (!isBlock) {
-                                        System.out.println(enemyArrayList.get(j).getName() + "attacked to " + characterArrayList.get(xRandom).getName() + " with damage " + enemyArrayList.get(j).attack());
+                                        System.out.println(enemyArrayList.get(j).getName() + " attacked to " + characterArrayList.get(xRandom).getName() + " with damage " + enemyArrayList.get(j).attack());
                                         double damage = enemyArrayList.get(j).attack();
                                         characterArrayList.get(xRandom).renewHP(1, damage);
                                         System.out.println("New HP: " + characterArrayList.get(xRandom).getHP());
@@ -506,14 +507,15 @@ public class Test {
                                 }
 
                                 if (characterArrayList.get(xRandom).getHP() <= 0) {
-                                    System.out.println(characterArrayList.get(xRandom).getName() + "died.");
+                                    System.out.println(characterArrayList.get(xRandom).getName() + " died.");
                                     characterArrayList.remove(xRandom);
                                 }
                             } else {
                                 System.out.println(enemyArrayList.get(j).getName() + " not available");
                             }
-                        }
-                    }else {
+                     */   }
+                    }
+                    else {
                         System.out.println("Do you want to see your score(Type yes for score)? or do you want to quit(Type quit for quit)?");
                         String question = sc.next();
                         switch (question) {
