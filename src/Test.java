@@ -512,7 +512,7 @@ public class Test {
                                 }
                             } else {
                                 System.out.println(enemyArrayList.get(j).getName() + " not available");
-                            }
+                            }}
                      */   }
                     }
                     else {
